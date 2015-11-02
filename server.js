@@ -61,6 +61,10 @@ app.use(require('express-session')({
   saveUninitialized: false,
 }));
 
+app.use(express.static(__dirname + '/node_modules/react-coast'), {
+  index: false
+});
+
 common.middleware = {};
 common.middleware.restHeaders = require('./middleware/restHeaders')();
 

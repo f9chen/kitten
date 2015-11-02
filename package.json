@@ -15,6 +15,7 @@
     "helmet": "*",
     "react": "*",
     "node-sass-middleware": "*",
-    "forever": "*"
+    "forever": "*",
+    "react-coast": "git://github.com/stockwatcher/react-coast.git#master"
   }
 }
