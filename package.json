@@ -1,0 +1,20 @@
+{
+  "name": "kitten",
+  "description": "A basic template project that can be used for any web application.",
+  "version": "0.1.0",
+  "private": false,
+  "dependencies": {
+    "express": "4.x",
+    "basic-auth": "1.x",
+    "body-parser": "*",
+    "morgan": "*",
+    "method-override": "*",
+    "cookie-parser": "*",
+    "express-session": "*",
+    "habitat": "*",
+    "helmet": "*",
+    "react": "*",
+    "node-sass-middleware": "*",
+    "forever": "*"
+  }
+}
