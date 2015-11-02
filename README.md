@@ -1,32 +1,31 @@
 # kitten
-A basic template project that can be used for any web application.
-Installation Instructions:
+A basic template project that can be used for any web application. It uses [react-coast](https://github.com/stockwatcher/react-coast), node, and express.
 
-Install Necessary Packages for Linux:
+##Installation Instructions:##
 
+###Install Necessary Packages for Linux:###
+```
 sudo apt-get install nodejs
 sudo apt-get install npm
-sudo apt-get install -y mongodb-org
-
-Install Necessary Packages for Mac OS:
-
+```
+###Install Necessary Packages for Mac OS:###
+```
 brew install nodejs
 brew install npm
-brew install mongodb
 
 Install NodeJS Packages
 
 npm install
+```
 
+##Create Environment Variables##
 
-Create Environment Variables
-
-cp .template.env .env
+`cp .template.env .env`
 
 Don't forget to edit .env to the appropriate configs
 
 Run Application:
-node server.js
+`node server.js`
 
-then go to(to be changed):
-http://localhost:8000/public/test?query=test
+then go to:
+http://localhost:8000/
