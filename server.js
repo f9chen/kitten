@@ -40,6 +40,9 @@ app.use(sassMiddleware({
 app.use(express.static(__dirname + '/static', {
   index: false
 }));
+app.use(express.static(__dirname + '/node_modules/react-coast', {
+  index: false
+}));
 
 var helmet = require('helmet');
 app.use(helmet.xssFilter());
@@ -60,10 +63,6 @@ app.use(require('express-session')({
   resave: true,
   saveUninitialized: false,
 }));
-
-app.use(express.static(__dirname + '/node_modules/react-coast'), {
-  index: false
-});
 
 common.middleware = {};
 common.middleware.restHeaders = require('./middleware/restHeaders')();
