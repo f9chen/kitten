@@ -13,7 +13,6 @@
     "express-session": "*",
     "habitat": "*",
     "helmet": "*",
-    "react": "*",
     "node-sass-middleware": "*",
     "forever": "*",
     "react-coast": "git://github.com/stockwatcher/react-coast.git#master"
