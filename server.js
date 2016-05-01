@@ -66,41 +66,23 @@ app.use(require('express-session')({
 
 common.middleware = {};
 common.middleware.restHeaders = require('./middleware/restHeaders')();
-
-// Authentication
-var basicAuth = require('basic-auth');
-common.auth = function (req, res, next) {
-  function unauthorized(res) {
-    res.set('WWW-Authenticate', 'Basic realm=Authorization Required');
-    return res.send(401);
-  }
-
-  var user = basicAuth(req);
-
-  if (!user || !user.name || !user.pass) {
-    return unauthorized(res);
-  }
-
-  if (user.name === 'admin' && user.pass === 'password') {
-    return next();
-  } else {
-    return unauthorized(res);
-  }
-};
+common.middleware.basicAuth = require('./middleware/basicAuth')();
 
 var server = app.listen(env.get('HTTP_PORT'), function () {
-Log.console("Listening on port " + server.address().port.toString() + " for HTTP");
+  Log.console("Listening on port " + server.address().port.toString() + " for HTTP");
 });
+
+app.get('/favicon.png',
+  function (request, response) {
+    response.sendfile('static/img/favicon.png');
+  });
+
+app.use(common.middleware.basicAuth);
 
 app.get(common.routes.homepage,
   function(request, response) {
     //response.redirect(common.routes.example);
     response.sendfile('static/example.html');
-  });
-
-app.get('/favicon.png',
-  function (request, response) {
-    response.sendfile('static/img/favicon.png');
   });
 
 //app.use(common.routes.public, require('./routes/public/public')(common, express.Router()));
