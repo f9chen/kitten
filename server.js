@@ -29,20 +29,16 @@ app.use(require('morgan')("combined")); // logger
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-var sassMiddleware = require('node-sass-middleware');
-app.use(sassMiddleware({
-  src: __dirname + '/sass',
-  dest: __dirname + '/static/gen/css',
-  debug: true,
-  outputStyle: 'compressed',
-  prefix: '/gen/css'
-}));
-app.use(express.static(__dirname + '/static', {
-  index: false
-}));
-app.use(express.static(__dirname + '/node_modules/react-coast', {
-  index: false
-}));
+
+app.use('/jquery', express.static(__dirname + '/node_modules/jquery', { index: false }));
+app.use('/react', express.static(__dirname + '/node_modules/react', { index: false }));
+app.use('/react-dom', express.static(__dirname + '/node_modules/react-dom', { index: false }));
+app.use('/babel', express.static(__dirname + '/node_modules/babel-standalone', { index: false }));
+app.use('/materialize-css', express.static(__dirname + '/node_modules/materialize-css', { index: false }));
+app.use('/react-coast/js', express.static(__dirname + '/node_modules/react-coast/js', { index: false }));
+app.use('/react-coast/css', express.static(__dirname + '/node_modules/react-coast/rc-gen/css', { index: false }));
+app.use('/palette', express.static(__dirname + '/node_modules/palette-css/pl-gen/css', { index: false }));
+app.use(express.static(__dirname + '/static', { index: false }));
 
 var helmet = require('helmet');
 app.use(helmet.xssFilter());
@@ -64,6 +60,11 @@ app.use(require('express-session')({
   saveUninitialized: false,
 }));
 
+var mustacheExpress = require('mustache-express');
+app.set('views', __dirname + '/partials');
+app.engine('mustache', mustacheExpress());
+app.set('view engine', 'mustache');
+
 common.middleware = {};
 common.middleware.restHeaders = require('./middleware/restHeaders')();
 common.middleware.basicAuth = require('./middleware/basicAuth')();
@@ -74,7 +75,7 @@ var server = app.listen(env.get('HTTP_PORT'), function () {
 
 app.get('/favicon.png',
   function (request, response) {
-    response.sendfile('static/img/favicon.png');
+    response.sendFile('static/img/favicon.png', {root: __dirname});
   });
 
 app.use(common.middleware.basicAuth);
@@ -82,7 +83,15 @@ app.use(common.middleware.basicAuth);
 app.get(common.routes.homepage,
   function(request, response) {
     //response.redirect(common.routes.example);
-    response.sendfile('static/example.html');
+    response.sendFile('static/example.html', {root: __dirname});
+  });
+
+app.get(common.routes.test,
+  function(request, response) {
+    console.log('test0');
+    response.render('test_partial', {
+      test_value: "Hello World!",
+    });
   });
 
 //app.use(common.routes.public, require('./routes/public/public')(common, express.Router()));

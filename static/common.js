@@ -4,7 +4,8 @@ function generate_common() {
   var common = this;
 
   common.routes = {
-    homepage: '/'
+    homepage: '/',
+    test: '/test',
   };
 
   String.prototype.capitalize = function() {
