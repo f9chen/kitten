@@ -83,7 +83,7 @@ app.use(common.middleware.basicAuth);
 app.get(common.routes.homepage,
   function(request, response) {
     //response.redirect(common.routes.example);
-    response.sendFile('static/example.html', {root: __dirname});
+    response.sendFile('static/simple.html', {root: __dirname});
   });
 
 app.get(common.routes.test,

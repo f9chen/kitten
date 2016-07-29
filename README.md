@@ -35,22 +35,32 @@ sudo gem install sass
 ```
 
 ##Create Environment Variables##
-
-`cp .template.env .env`
+```
+cp .template.env .env
+```
 
 Don't forget to edit .env to the appropriate configs
 
-Setup Dev Tools (Only need to do once):
+##Setup Dev Tools##
 ```
-npm install --global browserify
-npm install --global exorcist
-npm install --global watchify
+npm install --global browserify watchify exorcist
 ```
 
-Run Application:
+##Run Application: Development##
 ```
-./runserver.sh
+./runserver.sh dev
+OR
+npm run dev
 ```
 
 Then go to:
+```
 http://localhost:8000/
+```
+
+##Run Application: Production##
+```
+./runserver.sh
+OR
+npm start
+```

@@ -1,6 +1,7 @@
 #!/bin/bash
 
 OPTIONAL_PARAMS=""
+PIDS=()
 
 if [ "$1" = "dev" ]; then
   OPTIONAL_PARAMS="-m 1"
@@ -9,10 +10,12 @@ if [ "$1" = "dev" ]; then
 
   # Watch for js changes and pipe them through Browserify
   # Exorcist is for extracting the map file out of the js
-  watchify ./static/example2.js -o 'exorcist ./static/bundle.js.map > ./static/bundle.js' -vd &
+  watchify -t [ babelify --presets [ es2015 react ] ] ./static/main.js --outfile 'exorcist ./static/bundle.js.map > ./static/bundle.js' --debug --verbose &
+  PIDS+=($!)
 
   # Watch for sass changes
   sass --watch sass:static/gen/css &
+  PIDS+=($!)
 fi
 
 if [ "$1" != "dev" ]; then
@@ -21,9 +24,14 @@ if [ "$1" != "dev" ]; then
   echo "Done updating npm packages."
 fi
 
-# Kill all child processes when the script exits
-# See: http://stackoverflow.com/questions/360201/how-do-i-kill-background-processes-jobs-when-my-shell-script-exits
-trap "trap - SIGTERM && kill -- -$$" SIGINT SIGTERM EXIT
+# Kill all child script processes when the script exits
+for pid in ${PIDS[@]}; do
+  trap "kill ${pid}" SIGINT SIGTERM EXIT
+done
+
+if [ "$1" == "clean" ]; then
+  exit 0
+fi
 
 ./node_modules/forever/bin/forever --minUptime 2000 $OPTIONAL_PARAMS $MAX_RUN_TIMES server.js
 
