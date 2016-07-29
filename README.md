@@ -40,9 +40,11 @@ sudo gem install sass
 
 Don't forget to edit .env to the appropriate configs
 
-Setup Dev Tools:
+Setup Dev Tools (Only need to do once):
 ```
-sass --watch sass:static/gen/css
+npm install --global browserify
+npm install --global exorcist
+npm install --global watchify
 ```
 
 Run Application:
