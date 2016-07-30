@@ -31,9 +31,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use('/jquery', express.static(__dirname + '/node_modules/jquery', { index: false }));
-app.use('/react', express.static(__dirname + '/node_modules/react', { index: false }));
-app.use('/react-dom', express.static(__dirname + '/node_modules/react-dom', { index: false }));
-app.use('/babel', express.static(__dirname + '/node_modules/babel-standalone', { index: false }));
 app.use('/materialize-css', express.static(__dirname + '/node_modules/materialize-css', { index: false }));
 app.use('/react-coast/js', express.static(__dirname + '/node_modules/react-coast/js', { index: false }));
 app.use('/react-coast/css', express.static(__dirname + '/node_modules/react-coast/rc-gen/css', { index: false }));

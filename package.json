@@ -1,8 +1,13 @@
 {
   "name": "kitten",
   "description": "A basic template project that can be used for any web application.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/f9chen/kitten.git"
+  },
+  "license": "MIT",
   "scripts": {
     "start": "./runserver.sh",
     "dev": "./runserver.sh dev",
