@@ -1,5 +1,5 @@
 # kitten
-A basic template project that can be used for any web application. It uses [react-coast](https://github.com/stockwatcher/react-coast), node, and express.
+A basic template project that can be used to build any simple web application.
 
 ##Installation Instructions:##
 
@@ -19,6 +19,7 @@ Note: Install Ruby before doing the following steps
 sudo gem install listen
 sudo gem install sass
 ```
+
 ###Install Necessary Packages for Mac OS:###
 ```
 This installs n for easy nodejs management (includes npm):
@@ -42,11 +43,13 @@ cp .template.env .env
 Don't forget to edit .env to the appropriate configs
 
 ##Setup Dev Tools##
+Note: This is required for production as well.
 ```
 npm install --global browserify watchify exorcist
 ```
 
 ##Run Application: Development##
+Note: This must be running in order to watch for css and js changes.
 ```
 ./runserver.sh dev
 OR
